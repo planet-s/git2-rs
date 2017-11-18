@@ -118,6 +118,9 @@ fn main() {
         cfg.define("CURL", "OFF");
     }
 
+    cfg.define("CMAKE_SYSTEM_NAME", "Generic");
+    cfg.define("THREADSAFE", "Off"); 
+
     let _ = fs::remove_dir_all(env::var("OUT_DIR").unwrap());
     t!(fs::create_dir_all(env::var("OUT_DIR").unwrap()));
 

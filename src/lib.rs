@@ -588,7 +588,7 @@ fn init() {
     raw::init();
 }
 
-#[cfg(all(unix, not(target_os = "macos"), not(target_os = "ios"), feature = "https"))]
+#[cfg(all(any(unix, target_os = "redox"), not(target_os = "macos"), not(target_os = "ios"), feature = "https"))]
 fn openssl_env_init() {
     extern crate openssl_probe;
 

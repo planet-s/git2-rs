@@ -51,7 +51,7 @@ pub fn iter2cstrs<T, I>(iter: I) -> Result<(Vec<CString>, Vec<*const c_char>,
     Ok((cstrs, ptrs, raw))
 }
 
-#[cfg(unix)]
+#[cfg(any(unix, target_os = "redox"))]
 pub fn bytes2path(b: &[u8]) -> &Path {
     use std::os::unix::prelude::*;
     Path::new(OsStr::from_bytes(b))
@@ -114,7 +114,7 @@ impl<'a> IntoCString for &'a OsStr {
 }
 
 impl IntoCString for OsString {
-    #[cfg(unix)]
+    #[cfg(any(unix, target_os="redox"))]
     fn into_c_string(self) -> Result<CString, Error> {
         use std::os::unix::prelude::*;
         let s: &OsStr = self.as_ref();

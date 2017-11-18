@@ -6,7 +6,7 @@ extern crate libc;
 extern crate libssh2_sys as libssh2;
 #[cfg(feature = "curl")]
 extern crate curl_sys;
-#[cfg(all(unix, feature = "https"))]
+#[cfg(all(any(unix, target_os = "redox"), feature = "https"))]
 extern crate openssl_sys;
 extern crate libz_sys as libz;
 
@@ -2963,7 +2963,7 @@ pub fn init() {
     });
 }
 
-#[cfg(all(unix, feature = "https"))]
+#[cfg(all(any(unix, target_os = "redox"), feature = "https"))]
 #[doc(hidden)]
 pub fn openssl_init() {
     openssl_sys::init();
